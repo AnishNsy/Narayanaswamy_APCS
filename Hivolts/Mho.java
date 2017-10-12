@@ -5,8 +5,8 @@ import javax.swing.JFrame;
 //color is blue
 public class Mho extends Circles {
 
-	public Mho() {
-		
+	public Mho(boolean lifeStatus, int startPosX, int startPosY) {
+		super(lifeStatus, startPosX, startPosY);
 	}
 	
 	//goes through the 2d array to place the mho
@@ -24,7 +24,22 @@ public class Mho extends Circles {
 	
 	//When mho touches wall, it dies
 	public void contactFence() {
-		if()
+		if(this.posX == fence.getXPos && this.posY == fence.getYPos) {
+			
+		}
+	}
+	//when the mho the player does a move, mho
+	public void mhoMove() {
+		if(this.posX <  happy1.posX && this.posY < happy1.posY) {
+			
+		}
+		else if(this.posX) {
+			
+		}
+		else if(this.posX) {
+			
+		}
+		else()
 	}
 	
 
