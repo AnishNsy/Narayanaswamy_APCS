@@ -7,7 +7,6 @@ public class Happy extends Circles{
 		super(lifeStatus, startPosX, startPosY);
 	}
 	
-	
 	//goes through the 2d array to place the mho
 	//randomly on a game board while avoiding
 	//other objects

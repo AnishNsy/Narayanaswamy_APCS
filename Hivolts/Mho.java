@@ -30,16 +30,38 @@ public class Mho extends Circles {
 	}
 	//when the mho the player does a move, mho
 	public void mhoMove() {
+		//diag right up
 		if(this.posX <  happy1.posX && this.posY < happy1.posY) {
 			
 		}
-		else if(this.posX) {
+		//diag right down
+		else if(this.posX > happy1.posX && this.posY < happy1.posY) {
 			
 		}
-		else if(this.posX) {
+		//diag left down
+		else if(this.posX <  happy1.posX && this.posY > happy1.posY) {
 			
 		}
-		else()
+		//diag left up
+		else if(this.posX <  happy1.posX && this.posY < happy1.posY) {
+			
+		}
+		//up
+		else if(this.posX ==  happy1.posX && this.posY < happy1.posY) {
+			
+		}
+		//down
+		else if(this.posX ==  happy1.posX && this.posY > happy1.posY) {
+			
+		}
+		//left
+		else if(this.posX >  happy1.posX && this.posY == happy1.posY) {
+			
+		}
+		//right
+		else if(this.posX <  happy1.posX && this.posY == happy1.posY) {
+			
+		}
 	}
 	
 

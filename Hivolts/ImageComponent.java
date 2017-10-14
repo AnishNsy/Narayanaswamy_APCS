@@ -1,54 +1,70 @@
-import javax.swing.JOptionPane;
-import javax.swing.JApplet;
 
-import javax.swing.JApplet;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
-public class Main extends JApplet{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+import javax.imageio.ImageIO;
+import javax.swing.JComponent;
 
-	public static void main(String[] args){
-		String[][] grid = new String[12][12];
-		testSetUp(grid);
-		setBoard(grid);
-		print(grid);
-	}
+class ImageComponent extends JComponent{
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+    private Image imageFence;
+    private Image imageHappy;
+    private Image imageMho;
+    String[][] grid = new String[12][12];
+    public ImageComponent(){
+        try{
+            File image2 = new File("/Users/anish/Desktop/Fence.png");
+            File image1 = new File("/Users/anish/Desktop/Happy.png");
+            File image3 = new File("/Users/anish/Desktop/Fence.png");
+            imageFence = ImageIO.read(image2);
+            imageHappy = ImageIO.read(image1);
+            imageMho = ImageIO.read(image3);
 
-	private static void testSetUp(String[][] grid) {
-		for(int i = 0; i< grid.length; i++){
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+    public void paintComponent (Graphics g){
+        if(imageFence == null) return;
+        for(int i = 0; i< grid.length; i++){
 			for(int j = 0; j< grid[i].length; j++){
 				grid[i][j] = " ";
 			}
 		}
-	}
-
-	private static void print(String[][] grid) {
-		for(int i = 0; i< grid.length; i++){
-			for(int j = 0; j< grid[i].length; j++){
-				System.out.print(grid[i][j] + " ");
-			}
-			System.out.println(" ");
-		}
-		
-	}
-
-	private static void setBoard(String[][] grid){
-		fenceSetUp(grid);
-		mhoSetUp(grid);
-		mainCharSetUp(grid);
-	}
-
-	private static void mainCharSetUp(String[][] grid) {
-		int position1 = (int)(Math.random()*9.0);
+        fenceSetUp(grid);
+        mainCharSetUp(grid);
+        mhoSetUp(grid);
+        for(int i = 0; i<grid.length; i++) {
+        		for(int j = 0; j<grid[i].length; j++) {
+        			if(grid[i][j].equals("F")) {
+        				g.drawImage(imageFence, i*60, j*60-10, this);
+        			}
+        			else if(grid[i][j].equals("+")) {
+        				g.drawImage(imageHappy, i*60, j*60-10, this);
+        			}
+        			else if(!grid[i][j].equals(" ")) {
+        				g.drawImage(imageMho, i*60, j*60-10, this);
+        			}
+        		}
+        }
+    }
+    
+    private static void mainCharSetUp(String[][] grid) {
+		int position = (int)((Math.random()*(grid.length-2))+1);
 		position = closestOpenPositionOuterArray(position, grid);
-		int position2 = (int)(Math.random()*9.0);
+		int position2 = (int)((Math.random()*(grid.length-2))+1);
 		position2 = closestOpenPositionInnerArray(position, position2, grid);
 		grid[position][position2] = "+";
 	}
-
-	private static void mhoSetUp(String[][] grid) {
+    
+    private static void mhoSetUp(String[][] grid) {
 		String[] mhoNames = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c"};
 		for(int i = 0; i < mhoNames.length; i++){
 			int position = (int)((Math.random()*(grid.length-2))+1);
@@ -58,7 +74,7 @@ public class Main extends JApplet{
 			grid[position][position2] = mhoNames[i];
 		}
 	}
-
+    
 	private static void fenceSetUp(String[][] grid) {
 		fencePerimeterSetUp(grid);
 		fenceRandomsSetUp(grid);
@@ -73,7 +89,7 @@ public class Main extends JApplet{
 			grid[position][position2] = "F";
 		}
 	}
-
+	
 	private static void fencePerimeterSetUp(String[][] grid) {
 		for(int i = 0; i< grid.length; i++){
 			for(int j = 0; j< grid[i].length; j++){
@@ -137,6 +153,5 @@ public class Main extends JApplet{
 		}
 		return closestPosForward;
 	}	
+
 }
-	
-	
