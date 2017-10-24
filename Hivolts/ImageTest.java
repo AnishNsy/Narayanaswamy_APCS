@@ -6,10 +6,13 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JApplet;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
-public class ImageTest {
+//copied code from stackoverflow (#1) and then modified
+public class ImageTest{
+	//main method that creates an image frame and runs it
     public static void main(String[] args){
         EventQueue.invokeLater(new Runnable() {
             public void run(){
